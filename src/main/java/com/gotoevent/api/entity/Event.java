@@ -3,6 +3,7 @@ package com.gotoevent.api.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -13,13 +14,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "Event")
+@Table(name = "events")
 @NoArgsConstructor
 public class Event implements IValidation<Event> {
 	
 	@Id
-	@GeneratedValue
-	@Column(name = "id", nullable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
 	@Column(name = "name", nullable = false)
@@ -72,12 +72,12 @@ public class Event implements IValidation<Event> {
 
 	@Override
 	public boolean validateNullEmpty() {
-		return true;
+		return false;
 	}
 
 	@Override
 	public boolean validateNullEmptyIdentifier() {
-		return true;
+		return false;
 	}
 	
 }
