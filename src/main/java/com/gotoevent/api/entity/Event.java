@@ -2,9 +2,12 @@ package com.gotoevent.api.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -20,9 +23,10 @@ public class Event implements IValidation<Event> {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", nullable = false)
 	private long id;
 	
-	@Column(name = "name", nullable = false)
+	@Column(name = "name", nullable = false, unique = true)
 	private String name;
 	
 	@Column(name = "description", nullable = true)
@@ -30,6 +34,10 @@ public class Event implements IValidation<Event> {
 	
 	@Column(name = "image", nullable = false)
 	private String image;
+	
+	@JoinColumn(name = "category", nullable = false)
+	@OneToOne(fetch = FetchType.EAGER)
+	private Category category;
 	
 	public Event(long id, String name, String description, String image) {
 		this.id = id;
@@ -72,12 +80,19 @@ public class Event implements IValidation<Event> {
 
 	@Override
 	public boolean validateNullEmpty() {
-		return false;
+        if(id >= 0 && name != null && !(name.trim().equals("")) && description != null && !(description.trim().equals("")) && image != null && !(image.trim().equals(""))) {
+            return false;
+        }
+
+        return true;
 	}
 
 	@Override
 	public boolean validateNullEmptyIdentifier() {
-		return false;
-	}
+        if(name != null && !(name.trim().equals(""))) {
+            return false;
+        }
+        return true;
+	}	
 	
 }

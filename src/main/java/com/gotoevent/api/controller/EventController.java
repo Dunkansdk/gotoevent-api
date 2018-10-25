@@ -58,17 +58,13 @@ public class EventController {
         ResponseEntity<Event> status = new ResponseEntity<Event>(HttpStatus.NO_CONTENT);
 
         try {
-            if(value != null) {
-            	
-            	Event eventDB = this.eventService.getById(value.getId());
 
-                if (!value.validateNullEmpty()) {
-                    this.eventService.newObject(value);
-                    status = new ResponseEntity<Event>(HttpStatus.OK);
-                }
-                
+            if (!value.validateNullEmpty()) {
+                this.eventService.newObject(value);
+                status = new ResponseEntity<Event>(HttpStatus.OK);
             }
-        }catch(Exception e ){
+  
+        } catch(Exception e) {
             status = new ResponseEntity<Event>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
