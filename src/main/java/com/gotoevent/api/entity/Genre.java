@@ -14,9 +14,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "genre")
+@Table(name = "genres")
 @NoArgsConstructor
-public class Genre implements IValidation<Event> {
+public class Genre implements IValidation<Genre> {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,6 +53,11 @@ public class Genre implements IValidation<Event> {
 		
 		return this.id == genre.getId() && this.name.equals(genre.getName());
 	}
+	
+	@Override
+	public String toString() {
+		return "Genre [id=" + id + ", name=" + name + "]";
+	}	
 
 	@Override
 	public boolean validateNullEmpty() {
@@ -69,6 +74,6 @@ public class Genre implements IValidation<Event> {
             return false;
         }
         return true;
-	}	
+	}
 
 }

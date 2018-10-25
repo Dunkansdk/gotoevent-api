@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gotoevent.api.entity.Event;
+import com.gotoevent.api.service.CategoryService;
 import com.gotoevent.api.service.EventService;
 
 @RestController
@@ -23,6 +24,9 @@ public class EventController {
 	
 	@Autowired
 	private EventService eventService;
+	
+	@Autowired
+	private CategoryService categoryService;
 	
 	@SuppressWarnings("rawtypes")
 	@PostMapping(value = "/", consumes = "application/json")

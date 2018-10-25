@@ -75,12 +75,12 @@ public class Event implements IValidation<Event> {
 
 		Event event = (Event) obj;
 		
-		return this.id == event.getId() && this.name.equals(event.getName()) && this.description.equals(event.getDescription()) && this.image.equals(event.getImage());
+		return this.id == event.getId() && this.name.equals(event.getName()) && this.description.equals(event.getDescription()) && this.image.equals(event.getImage()) && this.category.equals(event.getCategory());
 	}
 
 	@Override
 	public boolean validateNullEmpty() {
-        if(id >= 0 && name != null && !(name.trim().equals("")) && description != null && !(description.trim().equals("")) && image != null && !(image.trim().equals(""))) {
+        if(id >= 0 && name != null && !(name.trim().equals("")) && description != null && !(description.trim().equals("")) && image != null && !(image.trim().equals("")) && category != null && category.validateNullEmpty()) {
             return false;
         }
 
