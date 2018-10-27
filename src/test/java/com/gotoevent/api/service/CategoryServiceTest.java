@@ -30,7 +30,7 @@ public class CategoryServiceTest {
         Category testCategory = this.categoryService.newObject(this.category);
         assertEquals(1,testCategory.getId());
         assertEquals("CategoriaTest", testCategory.getName());
-
+        
     }
 	
 	@Test

@@ -57,7 +57,7 @@ public class Artist implements IValidation<Artist> {
 	@Override
 	public boolean equals(Object obj) {
 		if(this == obj) return true;
-		if(obj == null || (obj instanceof Event)) return false;
+		if(obj == null || (obj instanceof Artist)) return false;
 
 		Artist artist = (Artist) obj;
 		
