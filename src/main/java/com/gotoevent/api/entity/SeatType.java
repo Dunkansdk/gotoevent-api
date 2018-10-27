@@ -14,25 +14,30 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "event_categories")
+@Table(name = "seat_types")
 @NoArgsConstructor
-public class Category implements IValidation<Category> {
+public class SeatType implements IValidation<SeatType> {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", nullable = false)
-	private long id;	
+	private long id;
 	
-	@Column(name = "name", length = 50, nullable = false, unique = true)
-	private String name;
+	@Column(name = "types", length = 50, nullable = false, unique = true)
+	private String type;
 	
-	public Category(long id, String name) {
+	public SeatType(long id, String type) {
 		this.id = id;
-		this.name = name;
+		this.type = type;
 	}
 	
-	public Category(String name) {
-		this.name = name;
+	public SeatType(String type) {
+		this.type = type;
+	}
+
+	@Override
+	public String toString() {
+		return "SeatType [id=" + id + ", type=" + type + "]";
 	}
 	
 	@Override
@@ -40,28 +45,23 @@ public class Category implements IValidation<Category> {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + (int) (id ^ (id >>> 32));
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if(this == obj) return true;
-		if(obj == null || (obj instanceof Category)) return false;
-
-		Category category = (Category) obj;
-		
-		return this.id == category.getId() && this.name.equals(category.getName());
-	}
-
-	@Override
-	public String toString() {
-		return "Category [id=" + id + ", name=" + name + "]";
 	}
 	
 	@Override
+	public boolean equals(Object obj) {
+		if(this == obj) return true;
+		if(obj == null || (obj instanceof SeatType)) return false;
+
+		SeatType seatType = (SeatType) obj;
+		
+		return this.id == seatType.getId() && this.type.equals(seatType.getType());
+	}
+
+	@Override
 	public boolean validateNullEmpty() {
-        if(id >= 0 && name != null && !(name.trim().equals(""))) {
+        if(id >= 0 && type != null && !(type.trim().equals(""))) {
             return false;
         }
 
@@ -70,10 +70,10 @@ public class Category implements IValidation<Category> {
 
 	@Override
 	public boolean validateNullEmptyIdentifier() {
-		if(name != null && !(name.trim().equals(""))) {
+        if(type != null && !(type.trim().equals(""))) {
             return false;
         }
         return true;
-	}	
+	}		
 
 }

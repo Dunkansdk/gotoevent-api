@@ -26,13 +26,13 @@ public class Event implements IValidation<Event> {
 	@Column(name = "id", nullable = false)
 	private long id;
 	
-	@Column(name = "name", nullable = false, unique = true)
+	@Column(name = "name", length = 50, nullable = false, unique = true)
 	private String name;
 	
-	@Column(name = "description", nullable = true)
+	@Column(name = "description", length = 65535, columnDefinition = "TEXT", nullable = true)
 	private String description;
 	
-	@Column(name = "image", nullable = false)
+	@Column(name = "image", length = 255, nullable = false)
 	private String image;
 	
 	@JoinColumn(name = "category", nullable = false)

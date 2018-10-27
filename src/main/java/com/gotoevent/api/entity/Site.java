@@ -26,19 +26,19 @@ public class Site implements IValidation<Site> {
 	@Column(name = "id", nullable = false)
 	private long id;
 	
-	@Column(name = "name", nullable = false, unique = true)
+	@Column(name = "name", length = 50, nullable = false, unique = true)
 	private String name;
 	
-	@Column(name = "city", nullable = false)
+	@Column(name = "city", length = 50, nullable = false)
 	private String city;
 	
-	@Column(name = "province", nullable = false)
+	@Column(name = "province", length = 50, nullable = false)
 	private String province;
 	
-	@Column(name = "address", nullable = false, unique = true)
+	@Column(name = "address", length = 80, nullable = false, unique = true)
 	private String address;
 	
-	@Column(name = "capacity", nullable = false)
+	@Column(name = "capacity", length = 8, nullable = false)
 	private int capacity;
 	
 	public Site(long id, String name, String city, String province, String address, int capacity) {

@@ -105,7 +105,7 @@ public class CategoryController {
     }
 
     @GetMapping(value= "/")
-    public ResponseEntity<Category> getByOneCategory(@RequestParam("iso") String name){
+    public ResponseEntity<Category> getByOneCategory(@RequestParam("name") String name){
 
     	ResponseEntity<Category> status = new ResponseEntity<Category>(HttpStatus.NO_CONTENT);
         Category category = null;

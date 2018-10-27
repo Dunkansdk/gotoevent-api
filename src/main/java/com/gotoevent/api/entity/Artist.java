@@ -26,7 +26,7 @@ public class Artist implements IValidation<Artist> {
 	@Column(name = "id", nullable = false)
 	private long id;
 	
-	@Column(name = "name", nullable = false, unique = true)
+	@Column(name = "name", length = 50, nullable = false, unique = true)
 	private String name;
 	
 	@JoinColumn(name = "genre", nullable = false)

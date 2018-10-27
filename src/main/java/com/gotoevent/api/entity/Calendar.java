@@ -32,13 +32,13 @@ public class Calendar implements IValidation<Calendar> {
 	@Column(name = "id", nullable = false)
 	private long id;	
 	
-	@Column(name = "description", nullable = false)
+	@Column(name = "description", length = 255, nullable = false)
 	private String description;
 
-	@Column(name = "date")
+	@Column(name = "date", nullable = false)
     private LocalDate date = LocalDate.now();
 	
-	@Column(name = "time")
+	@Column(name = "time", nullable = false)
     private LocalDateTime time = LocalDateTime.now();
 		
 	@JoinColumn(name = "site", nullable = false)
@@ -105,14 +105,19 @@ public class Calendar implements IValidation<Calendar> {
 
 	@Override
 	public boolean validateNullEmpty() {
-		// TODO Auto-generated method stub
-		return true;
+		if(id >= 0 && date != null && time != null && description != null && !(description.trim().equals("")) && site != null && !(site.validateNullEmpty()) && event != null && event.validateNullEmpty() && artists != null && artists.isEmpty()) {
+            return false;
+        }
+
+        return true;
 	}
 
 	@Override
 	public boolean validateNullEmptyIdentifier() {
-		// TODO Auto-generated method stub
-		return true;
+		if(date != null && time != null) {			
+            return false;
+        }
+        return true;
 	}
 	
 }
