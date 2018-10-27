@@ -5,7 +5,7 @@ Gotoevent API
 ![ERD SQL](https://github.com/Dunkansdk/gotoevent-api/blob/master/images/der.png)
 
 ## Project relationships:
-![Project relationships](https://github.com/Dunkansdk/gotoevent-api/blob/master/images/relation.png)
+![Project relationships](https://github.com/Dunkansdk/gotoevent-api/blob/master/images/relation_update.png)
 <br />
 The connection of the Web Service to the api rest is done with the help of RestTemplate. 
 ** RestTemplate ** is the class that Spring offers for access from the client side to REST Services.
