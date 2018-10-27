@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-10-2018 a las 01:10:59
+-- Tiempo de generación: 28-10-2018 a las 01:22:24
 -- Versión del servidor: 10.1.36-MariaDB
 -- Versión de PHP: 7.2.11
 
@@ -42,7 +42,7 @@ CREATE TABLE `artists` (
 
 CREATE TABLE `calendar` (
   `id` bigint(20) NOT NULL,
-  `description` varchar(255) NOT NULL,
+  `description` text NOT NULL,
   `date` date NOT NULL,
   `time` datetime NOT NULL,
   `event` bigint(20) NOT NULL,

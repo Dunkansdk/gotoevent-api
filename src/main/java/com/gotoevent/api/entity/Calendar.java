@@ -32,7 +32,7 @@ public class Calendar implements IValidation<Calendar> {
 	@Column(name = "id", nullable = false)
 	private long id;	
 	
-	@Column(name = "description", length = 255, nullable = false)
+	@Column(name = "description", length = 65535, columnDefinition = "TEXT", nullable = false)
 	private String description;
 
 	@Column(name = "date", nullable = false)
