@@ -5,12 +5,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.gotoevent.api.entity.Category;
+import com.gotoevent.api.entity.Seat;
 
 @Repository
-public interface CategoryRepository extends JpaRepository<Category, Long> {
+public interface SeatRepository extends JpaRepository<Seat, Long> {
 	
-	@Query(value="SELECT * FROM categories a WHERE a.name = :name", nativeQuery = true)
-    public Category getAttribute(@Param("name")String name);
+	@Query(value="SELECT * FROM seats a WHERE a.seat_type = :seat_type", nativeQuery = true)
+    public Seat getAttribute(@Param("seat_type")Integer seat_type);
 
 }

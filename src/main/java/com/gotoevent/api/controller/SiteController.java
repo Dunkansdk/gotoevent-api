@@ -30,7 +30,7 @@ public class SiteController {
 
     	ResponseEntity<Site> status = new ResponseEntity<Site>(HttpStatus.NO_CONTENT);
 
-        try{
+        try {
             for(Site site : sites) {
                 if (!site.validateNullEmpty()) {
                     this.siteService.newObject(site);
@@ -53,7 +53,7 @@ public class SiteController {
 
     	ResponseEntity<Site> status = new ResponseEntity<Site>(HttpStatus.NO_CONTENT);
 
-        try{
+        try {
             if(site != null && !(site.validateNullEmpty())) {
             	Site siteDB = this.siteService.getById(site.getId());
 
@@ -74,7 +74,7 @@ public class SiteController {
 
     	ResponseEntity<Site> status = new ResponseEntity<Site>(HttpStatus.NO_CONTENT);
 
-        try{
+        try {
             if(id != null && id > 0){
                 this.siteService.removeObject(id);
                 status = new ResponseEntity<Site>(HttpStatus.OK);
@@ -92,7 +92,7 @@ public class SiteController {
     	ResponseEntity<List<Site>> status = new ResponseEntity<List<Site>>(HttpStatus.NO_CONTENT);
         List<Site> sites = new ArrayList<Site>();
 
-        try{
+        try {
         	sites = this.siteService.getAll();
            if(!sites.isEmpty()){
                status = new ResponseEntity<List<Site>>(sites, HttpStatus.OK);
@@ -110,7 +110,7 @@ public class SiteController {
     	ResponseEntity<Site> status = new ResponseEntity<Site>(HttpStatus.NO_CONTENT);
         Site site = null;
 
-        try{
+        try {
             if(name != null) {
             	site = this.siteService.getByAttributeType(name);
 

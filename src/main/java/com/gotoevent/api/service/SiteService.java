@@ -28,10 +28,10 @@ public class SiteService implements IRepositoryMethods<Site> {
 
 	@Override
 	public Site getById(Long id) throws Exception {
-		Optional<Site> eventOptional = this.siteRepository.findById(id);
+		Optional<Site> siteOptional = this.siteRepository.findById(id);
 		
-		if(eventOptional.isPresent()) {
-			return eventOptional.get();
+		if(siteOptional.isPresent()) {
+			return siteOptional.get();
 		}		
 		return null;
 	}

@@ -5,12 +5,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.gotoevent.api.entity.Category;
+import com.gotoevent.api.entity.Artist;
 
 @Repository
-public interface CategoryRepository extends JpaRepository<Category, Long> {
+public interface ArtistRepository extends JpaRepository<Artist, Long> {
 	
-	@Query(value="SELECT * FROM categories a WHERE a.name = :name", nativeQuery = true)
-    public Category getAttribute(@Param("name")String name);
+	@Query(value="SELECT * FROM artists a WHERE a.name = :name", nativeQuery = true)
+    public Artist getAttribute(@Param("name")String name);
 
 }

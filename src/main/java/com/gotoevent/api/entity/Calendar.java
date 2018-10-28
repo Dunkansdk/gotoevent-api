@@ -23,7 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "calendar")
+@Table(name = "calendars")
 @NoArgsConstructor
 public class Calendar implements IValidation<Calendar> {
 	

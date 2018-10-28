@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.gotoevent.api.entity.Event;
 
 @Repository
-public interface EventRepository extends JpaRepository<Event, Long>{
+public interface EventRepository extends JpaRepository<Event, Long> {
 	
 	@Query(value="SELECT * FROM events a WHERE a.name = :name", nativeQuery = true)
     public Event getAttribute(@Param("name")String name);

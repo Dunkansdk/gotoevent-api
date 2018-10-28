@@ -14,33 +14,31 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gotoevent.api.entity.Event;
-import com.gotoevent.api.service.EventService;
+import com.gotoevent.api.entity.Genre;
+import com.gotoevent.api.service.GenreService;
+
 
 @RestController
-@RequestMapping(value = "/event")
-public class EventController {
+@RequestMapping(value = "/genre")
+public class GenreController {
 	
 	@Autowired
-	private EventService eventService;
-	
-	//@Autowired
-	//private CategoryService categoryService;
-	
+	private GenreService genreService;
+
 	@SuppressWarnings("rawtypes")
 	@PostMapping(value = "/", consumes = "application/json")
-	public ResponseEntity add(@RequestBody List<Event> events) {
+	public ResponseEntity add(@RequestBody List<Genre> genres) {
 		
 		// Ante la duda siempre es un error
 		ResponseEntity status = new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 		
 		try {
-			for(Event event : events) {
+			for(Genre genre : genres) {
 				
 				// Deberia setear aca otro service (FK)
 				
-				if(!event.validateNullEmpty()) {
-					this.eventService.newObject(event);
+				if(!genre.validateNullEmpty()) {
+					this.genreService.newObject(genre);
 					status = new ResponseEntity(HttpStatus.OK);
 				} else {
 					status = new ResponseEntity(HttpStatus.NO_CONTENT);
@@ -56,35 +54,35 @@ public class EventController {
 	}
 	
 	@PutMapping(value = "/", consumes = "application/json")
-    public ResponseEntity<Event> update(@RequestBody Event value){
+    public ResponseEntity<Genre> update(@RequestBody Genre value){
 
-        ResponseEntity<Event> status = new ResponseEntity<Event>(HttpStatus.NO_CONTENT);
+        ResponseEntity<Genre> status = new ResponseEntity<Genre>(HttpStatus.NO_CONTENT);
 
         try {
 
             if (!value.validateNullEmpty()) {
-                this.eventService.newObject(value);
-                status = new ResponseEntity<Event>(HttpStatus.OK);
+                this.genreService.newObject(value);
+                status = new ResponseEntity<Genre>(HttpStatus.OK);
             }
   
         } catch(Exception e) {
-            status = new ResponseEntity<Event>(HttpStatus.INTERNAL_SERVER_ERROR);
+            status = new ResponseEntity<Genre>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         return status;
     }
 	
 	@GetMapping
-    public ResponseEntity<List<Event>> getAll() {
+    public ResponseEntity<List<Genre>> getAll() {
 
-        ResponseEntity<List<Event>> status = new ResponseEntity<List<Event>>(HttpStatus.NO_CONTENT);
+        ResponseEntity<List<Genre>> status = new ResponseEntity<List<Genre>>(HttpStatus.NO_CONTENT);
 
         try {
-            List<Event> events = new ArrayList<Event>();
-            events = this.eventService.getAll();
+            List<Genre> genres = new ArrayList<Genre>();
+            genres = this.genreService.getAll();
 
-            if (!events.isEmpty()) {
-                status = new ResponseEntity<List<Event>>(events, HttpStatus.OK);
+            if (!genres.isEmpty()) {
+                status = new ResponseEntity<List<Genre>>(genres, HttpStatus.OK);
             }
         } catch (Exception e) {
             status = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -94,21 +92,21 @@ public class EventController {
     }
 
     @GetMapping(value= "/")
-    public ResponseEntity<Event> getByOneAirport(@RequestParam("name") String name) {
+    public ResponseEntity<Genre> getByOneAirport(@RequestParam("name") String name) {
 
-        ResponseEntity<Event> status = new ResponseEntity<Event>(HttpStatus.NO_CONTENT);
-        Event event = null;
+        ResponseEntity<Genre> status = new ResponseEntity<Genre>(HttpStatus.NO_CONTENT);
+        Genre genre = null;
 
         try {
             if(name != null) {
-            	event = this.eventService.getByAttributeType(name);
+            	genre = this.genreService.getByAttributeType(name);
 
-                if(event != null){
-                    status = new ResponseEntity<Event>(event, HttpStatus.OK);
+                if(genre != null){
+                    status = new ResponseEntity<Genre>(genre, HttpStatus.OK);
                 }
             }
         } catch(Exception e) {
-            status = new ResponseEntity<Event>(HttpStatus.INTERNAL_SERVER_ERROR);
+            status = new ResponseEntity<Genre>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         return status;

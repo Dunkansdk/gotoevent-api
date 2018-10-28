@@ -24,23 +24,21 @@ public class CategoryServiceTest {
 	Category category = new Category(1, "CategoriaTest");
 	
 	@Test
-    public void addTest()throws Exception {
+    public void addTest() throws Exception {
         when(this.categoryRepository.save(this.category)).thenReturn(this.category);
         
         Category testCategory = this.categoryService.newObject(this.category);
-        assertEquals(1,testCategory.getId());
-        assertEquals("CategoriaTest", testCategory.getName());
-        
+        assertEquals(1, testCategory.getId());
+        assertEquals("CategoriaTest", testCategory.getName());        
     }
 	
 	@Test
-    public void getByIdTest()throws Exception {
+    public void getByIdTest() throws Exception {
         when(this.categoryRepository.findById(this.category.getId())).thenReturn(java.util.Optional.ofNullable(this.category));
         
         Category testCategory =this.categoryService.getById(this.category.getId());        
         assertEquals(1, testCategory.getId());
-        assertEquals("CategoriaTest", testCategory.getName());
- 
+        assertEquals("CategoriaTest", testCategory.getName()); 
     }	
 
 }

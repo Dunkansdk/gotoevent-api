@@ -29,10 +29,10 @@ public class CategoryService implements IRepositoryMethods<Category> {
 	@Override
 	public Category getById(Long id) throws Exception {
 		Category category = null;
-		Optional<Category> eventOptional = this.categoryRepository.findById(id);
+		Optional<Category> categoryOptional = this.categoryRepository.findById(id);
 		
-		if(eventOptional.isPresent()) {
-			category = eventOptional.get();
+		if(categoryOptional.isPresent()) {
+			category = categoryOptional.get();
 		}
 		
 		return category;

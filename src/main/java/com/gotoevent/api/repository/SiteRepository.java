@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.gotoevent.api.entity.Site;
 
 @Repository
-public interface SiteRepository extends JpaRepository<Site, Long>{
+public interface SiteRepository extends JpaRepository<Site, Long> {
 	
 	@Query(value="SELECT * FROM sites a WHERE a.name = :name", nativeQuery = true)
     public Site getAttribute(@Param("name")String name);

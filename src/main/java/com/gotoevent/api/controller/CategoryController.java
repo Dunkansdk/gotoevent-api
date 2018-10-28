@@ -30,7 +30,7 @@ public class CategoryController {
 
     	ResponseEntity<Category> status = new ResponseEntity<Category>(HttpStatus.NO_CONTENT);
 
-        try{
+        try {
             for(Category category : categories) {
                 if (!category.validateNullEmpty()) {
                     this.categoryService.newObject(category);
@@ -53,7 +53,7 @@ public class CategoryController {
 
     	ResponseEntity<Category> status = new ResponseEntity<Category>(HttpStatus.NO_CONTENT);
 
-        try{
+        try {
             if(category != null && !(category.validateNullEmpty())) {
                 Category categoryDB = this.categoryService.getById(category.getId());
 
@@ -74,7 +74,7 @@ public class CategoryController {
 
     	ResponseEntity<Category> status = new ResponseEntity<Category>(HttpStatus.NO_CONTENT);
 
-        try{
+        try {
             if(id != null && id > 0){
                 this.categoryService.removeObject(id);
                 status = new ResponseEntity<Category>(HttpStatus.OK);

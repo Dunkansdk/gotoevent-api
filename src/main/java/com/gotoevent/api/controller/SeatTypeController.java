@@ -14,33 +14,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gotoevent.api.entity.Event;
-import com.gotoevent.api.service.EventService;
+import com.gotoevent.api.entity.SeatType;
+import com.gotoevent.api.service.SeatTypeService;
 
 @RestController
-@RequestMapping(value = "/event")
-public class EventController {
+@RequestMapping(value = "/seattype")
+public class SeatTypeController {
 	
 	@Autowired
-	private EventService eventService;
+	private SeatTypeService seatTypeService;
 	
 	//@Autowired
 	//private CategoryService categoryService;
 	
 	@SuppressWarnings("rawtypes")
 	@PostMapping(value = "/", consumes = "application/json")
-	public ResponseEntity add(@RequestBody List<Event> events) {
+	public ResponseEntity add(@RequestBody List<SeatType> seatTypes) {
 		
 		// Ante la duda siempre es un error
 		ResponseEntity status = new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
 		
 		try {
-			for(Event event : events) {
+			for(SeatType seatType : seatTypes) {
 				
 				// Deberia setear aca otro service (FK)
 				
-				if(!event.validateNullEmpty()) {
-					this.eventService.newObject(event);
+				if(!seatType.validateNullEmpty()) {
+					this.seatTypeService.newObject(seatType);
 					status = new ResponseEntity(HttpStatus.OK);
 				} else {
 					status = new ResponseEntity(HttpStatus.NO_CONTENT);
@@ -56,35 +56,35 @@ public class EventController {
 	}
 	
 	@PutMapping(value = "/", consumes = "application/json")
-    public ResponseEntity<Event> update(@RequestBody Event value){
+    public ResponseEntity<SeatType> update(@RequestBody SeatType value){
 
-        ResponseEntity<Event> status = new ResponseEntity<Event>(HttpStatus.NO_CONTENT);
+        ResponseEntity<SeatType> status = new ResponseEntity<SeatType>(HttpStatus.NO_CONTENT);
 
         try {
 
             if (!value.validateNullEmpty()) {
-                this.eventService.newObject(value);
-                status = new ResponseEntity<Event>(HttpStatus.OK);
+                this.seatTypeService.newObject(value);
+                status = new ResponseEntity<SeatType>(HttpStatus.OK);
             }
   
         } catch(Exception e) {
-            status = new ResponseEntity<Event>(HttpStatus.INTERNAL_SERVER_ERROR);
+            status = new ResponseEntity<SeatType>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         return status;
     }
 	
 	@GetMapping
-    public ResponseEntity<List<Event>> getAll() {
+    public ResponseEntity<List<SeatType>> getAll() {
 
-        ResponseEntity<List<Event>> status = new ResponseEntity<List<Event>>(HttpStatus.NO_CONTENT);
+        ResponseEntity<List<SeatType>> status = new ResponseEntity<List<SeatType>>(HttpStatus.NO_CONTENT);
 
         try {
-            List<Event> events = new ArrayList<Event>();
-            events = this.eventService.getAll();
+            List<SeatType> seatTypes = new ArrayList<SeatType>();
+            seatTypes = this.seatTypeService.getAll();
 
-            if (!events.isEmpty()) {
-                status = new ResponseEntity<List<Event>>(events, HttpStatus.OK);
+            if (!seatTypes.isEmpty()) {
+                status = new ResponseEntity<List<SeatType>>(seatTypes, HttpStatus.OK);
             }
         } catch (Exception e) {
             status = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -94,24 +94,25 @@ public class EventController {
     }
 
     @GetMapping(value= "/")
-    public ResponseEntity<Event> getByOneAirport(@RequestParam("name") String name) {
+    public ResponseEntity<SeatType> getByOneSeatType(@RequestParam("seatType_type") String type) {
 
-        ResponseEntity<Event> status = new ResponseEntity<Event>(HttpStatus.NO_CONTENT);
-        Event event = null;
+        ResponseEntity<SeatType> status = new ResponseEntity<SeatType>(HttpStatus.NO_CONTENT);
+        SeatType seatType = null;
 
         try {
-            if(name != null) {
-            	event = this.eventService.getByAttributeType(name);
+            if(type != null) {
+            	seatType = this.seatTypeService.getByAttributeType(type);
 
-                if(event != null){
-                    status = new ResponseEntity<Event>(event, HttpStatus.OK);
+                if(seatType != null){
+                    status = new ResponseEntity<SeatType>(seatType, HttpStatus.OK);
                 }
             }
         } catch(Exception e) {
-            status = new ResponseEntity<Event>(HttpStatus.INTERNAL_SERVER_ERROR);
+            status = new ResponseEntity<SeatType>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         return status;
     }
 
 }
+
