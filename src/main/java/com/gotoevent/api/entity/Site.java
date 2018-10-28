@@ -1,5 +1,8 @@
 package com.gotoevent.api.entity;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,7 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -37,31 +40,32 @@ public class Site implements IValidation<Site> {
 	
 	@Column(name = "address", length = 80, nullable = false, unique = true)
 	private String address;
+		
+	@JoinColumn(name = "seatTypes", nullable = false)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private Set<SeatType> seatTypes;
 	
-	@Column(name = "capacity", length = 8, nullable = false)
-	private int capacity;
-	
-	public Site(long id, String name, String city, String province, String address, int capacity) {
+	public Site(long id, String name, String city, String province, String address, Set<SeatType> seatTypes) {
 		this.id = id;
 		this.name = name;
 		this.city = city;
 		this.province = province;
 		this.address = address;
-		this.capacity = capacity;
+		this.seatTypes = seatTypes;
 	}
 	
-	public Site(String name, String city, String province, String address, int capacity) {
+	public Site(String name, String city, String province, String address, int capacity, Set<SeatType> seatTypes) {
 		this.name = name;
 		this.city = city;
 		this.province = province;
 		this.address = address;
-		this.capacity = capacity;
+		this.seatTypes = seatTypes;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Site [id=" + id + ", name=" + name + ", city=" + city + ", province=" + province + ", address="
-				+ address + ", capacity=" + capacity + "]";
+				+ address +", seatTypes=" + seatTypes + "]";
 	}
 
 	@Override
@@ -69,11 +73,11 @@ public class Site implements IValidation<Site> {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
-		result = prime * result + capacity;
 		result = prime * result + ((city == null) ? 0 : city.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((province == null) ? 0 : province.hashCode());
+		result = prime * result + ((seatTypes == null) ? 0 : seatTypes.hashCode());
 		return result;
 	}
 
@@ -85,13 +89,16 @@ public class Site implements IValidation<Site> {
 		Site site = (Site) obj;
 		
 		return this.id == site.getId() && this.city.equals(site.getCity()) && this.province.equals(site.getProvince()) 
-			&& this.address.equals(site.getAddress()) && this.capacity == site.getCapacity() && this.name.equals(site.getName());
+			&& this.address.equals(site.getAddress()) && this.name.equals(site.getName()) && !this.seatTypes.isEmpty();
 	}
 
 	@Override
 	public boolean validateNullEmpty() {
         if(id >= 0 && name != null && !(name.trim().equals("")) && address != null && !(address.trim().equals(""))
-        		   && city != null && !(city.trim().equals("")) && province != null && !(province.trim().equals(""))) {
+        		&& city != null && !(city.trim().equals("")) && province != null && !(province.trim().equals("")) && !this.seatTypes.isEmpty()) {
+        	for(SeatType seatType : seatTypes) {
+        		if(!seatType.validateNullEmpty()) return false;
+        	}
             return false;
         }
 
@@ -104,6 +111,6 @@ public class Site implements IValidation<Site> {
             return false;
         }
         return true;
-	}	
+	}
 
 }

@@ -12,5 +12,5 @@ public interface EventRepository extends JpaRepository<Event, Long>{
 	
 	@Query(value="SELECT * FROM events a WHERE a.name = :name", nativeQuery = true)
     public Event getAttribute(@Param("name")String name);
-
+	
 }

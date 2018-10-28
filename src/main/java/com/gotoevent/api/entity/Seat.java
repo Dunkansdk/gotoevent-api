@@ -2,7 +2,6 @@ package com.gotoevent.api.entity;
 
 import java.math.BigDecimal;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,8 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -41,30 +38,23 @@ public class Seat implements IValidation<Seat> {
 	@OneToOne(fetch = FetchType.EAGER)
 	private SeatType seatType;
 	
-	@JoinColumn(name = "calendar", nullable = false)
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	private Calendar calendar;
-	
-	public Seat(long id, String number, BigDecimal price, SeatType seatType, Calendar calendar) {
+	public Seat(long id, String number, BigDecimal price, SeatType seatType) {
 		this.id = id;
 		this.number = number;
 		this.price = price;
 		this.seatType = seatType;
-		this.calendar = calendar;
 	}
 	
-	public Seat(String number, BigDecimal price, SeatType seatType, Calendar calendar) {
+	public Seat(String number, BigDecimal price, SeatType seatType) {
 		this.number = number;
 		this.price = price;
 		this.seatType = seatType;
-		this.calendar = calendar;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((calendar == null) ? 0 : calendar.hashCode());
 		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((number == null) ? 0 : number.hashCode());
 		result = prime * result + ((price == null) ? 0 : price.hashCode());
@@ -79,18 +69,17 @@ public class Seat implements IValidation<Seat> {
 
 		Seat seat = (Seat) obj;
 		
-		return this.id == seat.getId() && this.number.equals(seat.getNumber()) && this.price.equals(seat.getPrice()) && this.seatType.equals(seat.getSeatType()) && this.calendar.equals(seat.getCalendar());
+		return this.id == seat.getId() && this.number.equals(seat.getNumber()) && this.price.equals(seat.getPrice()) && this.seatType.equals(seat.getSeatType());
 	}
 
 	@Override
 	public String toString() {
-		return "Seat [id=" + id + ", number=" + number + ", price=" + price + ", seatType=" + seatType + ", calendar="
-				+ calendar + "]";
+		return "Seat [id=" + id + ", number=" + number + ", price=" + price + ", seatType=" + seatType + "]";
 	}
 
 	@Override
 	public boolean validateNullEmpty() {
-        if(id >= 0 && number != null && !(number.trim().equals("")) && price != null && seatType.validateNullEmpty() && calendar.validateNullEmpty()) {
+        if(id >= 0 && number != null && !(number.trim().equals("")) && price != null && seatType.validateNullEmpty()) {
             return false;
         }
 

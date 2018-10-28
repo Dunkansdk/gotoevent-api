@@ -23,32 +23,38 @@ public class SeatType implements IValidation<SeatType> {
 	@Column(name = "id", nullable = false)
 	private long id;
 	
-	@Column(name = "types", length = 50, nullable = false, unique = true)
+	@Column(name = "type", length = 50, nullable = false)
 	private String type;
 	
-	public SeatType(long id, String type) {
+	@Column(name = "capacity", length = 8, nullable = false)
+	private int capacity;
+	
+	public SeatType(long id, String type, int capacity) {
 		this.id = id;
 		this.type = type;
+		this.capacity = capacity;
 	}
 	
-	public SeatType(String type) {
+	public SeatType(String type, int capacity) {
 		this.type = type;
+		this.capacity = capacity;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "SeatType [id=" + id + ", type=" + type + "]";
+		return "SeatType [id=" + id + ", type=" + type + ", capacity=" + capacity + "]";
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + capacity;
 		result = prime * result + (int) (id ^ (id >>> 32));
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if(this == obj) return true;
@@ -56,8 +62,8 @@ public class SeatType implements IValidation<SeatType> {
 
 		SeatType seatType = (SeatType) obj;
 		
-		return this.id == seatType.getId() && this.type.equals(seatType.getType());
-	}
+		return this.id == seatType.getId() && this.type.equals(seatType.getType()) && this.capacity == seatType.getCapacity();
+	}	
 
 	@Override
 	public boolean validateNullEmpty() {
@@ -74,6 +80,6 @@ public class SeatType implements IValidation<SeatType> {
             return false;
         }
         return true;
-	}		
+	}
 
 }
