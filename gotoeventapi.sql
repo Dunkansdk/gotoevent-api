@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-10-2018 a las 04:14:33
+-- Tiempo de generación: 28-10-2018 a las 04:21:27
 -- Versión del servidor: 10.1.36-MariaDB
 -- Versión de PHP: 7.2.11
 
@@ -42,11 +42,11 @@ CREATE TABLE `artists` (
 
 CREATE TABLE `calendar` (
   `id` bigint(20) NOT NULL,
-  `date` date NOT NULL,
   `description` text NOT NULL,
+  `date` date NOT NULL,
   `time` datetime NOT NULL,
-  `event` bigint(20) NOT NULL,
-  `site` bigint(20) NOT NULL
+  `site` bigint(20) NOT NULL,
+  `event` bigint(20) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -68,9 +68,9 @@ CREATE TABLE `calendar_artists` (
 
 CREATE TABLE `events` (
   `id` bigint(20) NOT NULL,
+  `name` varchar(50) NOT NULL,
   `description` text,
   `image` varchar(255) NOT NULL,
-  `name` varchar(50) NOT NULL,
   `category` bigint(20) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -117,8 +117,8 @@ CREATE TABLE `seats` (
 
 CREATE TABLE `seat_types` (
   `id` bigint(20) NOT NULL,
-  `capacity` int(11) NOT NULL,
-  `type` varchar(50) NOT NULL
+  `type` varchar(50) NOT NULL,
+  `capacity` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -129,10 +129,10 @@ CREATE TABLE `seat_types` (
 
 CREATE TABLE `sites` (
   `id` bigint(20) NOT NULL,
-  `address` varchar(80) NOT NULL,
-  `city` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `province` varchar(50) NOT NULL
+  `city` varchar(50) NOT NULL,
+  `province` varchar(50) NOT NULL,
+  `address` varchar(80) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

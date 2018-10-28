@@ -1,39 +1,64 @@
 --
--- load 'genres' table
+-- Volcado de datos para la tabla `genres`
 --
-INSERT INTO `genres`(`name`) VALUES ("Generico");
-INSERT INTO `genres`(`name`) VALUES ("Rock and Roll");
-INSERT INTO `genres`(`name`) VALUES ("Blues");
-INSERT INTO `genres`(`name`) VALUES ("Reggae");
-INSERT INTO `genres`(`name`) VALUES ("Metal");
-INSERT INTO `genres`(`name`) VALUES ("Country");
-INSERT INTO `genres`(`name`) VALUES ("Funk");
-INSERT INTO `genres`(`name`) VALUES ("Pop");
-INSERT INTO `genres`(`name`) VALUES ("Hip Hop");
+INSERT INTO `genres`(`name`) VALUES 
+("Generico"),
+("Rock and Roll"),
+("Blues"),
+("Reggae"),
+("Metal"),
+("Country"),
+("Trap"),
+("Pop"),
+("Hip Hop");
 
 --
--- load event_categories table
+-- Volcado de datos para la tabla `event_categories`
 --
-INSERT INTO `event_categories`(`name`) VALUES ("Recital");
-INSERT INTO `event_categories`(`name`) VALUES ("Festival");
-INSERT INTO `event_categories`(`name`) VALUES ("Concierto");
-INSERT INTO `event_categories`(`name`) VALUES ("Obra teatral");
-INSERT INTO `event_categories`(`name`) VALUES ("Exposicion");
-INSERT INTO `event_categories`(`name`) VALUES ("Familiar");
-INSERT INTO `event_categories`(`name`) VALUES ("Standup");
+INSERT INTO `event_categories`(`name`) VALUES 
+("Recital"),
+("Festival"),
+("Concierto"),
+("Obra teatral"),
+("Exposicion"),
+("Familiar"),
+("Standup");
 
 --
--- load events
+-- Volcado de datos para la tabla `events`
 --
-INSERT INTO `events`(`name`, `description`, `image`, `category`) VALUES ("No te va a gustar", "NTVG Vuelve para realizar el show de cierre de la Gira “Suenan Las Alarmas”, su ultimo disco editado en Mayo de 2017.", "https://www.tuentrada.com/Articlemedia/Images/TuEntrada/mas_info/Obras/ntvgObras-inter-25nov.jpg", 1);
-INSERT INTO `events`(`name`, `image`, `category`) VALUES ("Moldavsky Sigue Suelto! ", "https://www.tuentrada.com/Articlemedia/Images/TuEntrada/mas_info/teatroApolo/molda_inter_gran2.jpg", 7);
-INSERT INTO `events`(`name`, `description`, `image`, `category`) VALUES ("Drink & Food Days", "Llega la 2ª edición de DRINK & FOOD DAYS BUENOS AIRES. La iniciativa que convoca a descubrir el feliz maridaje entre la coctelería y la buena gastronomía en las mejores barras: rooftops y decks de Hoteles de lujo, Bares y Restaurantes Premium, a un precio promocional.
-Del 8 al 22 de noviembre, 20 barras seleccionadas ofrecerán una cena con tragos a un precio promocional, el mismo para todas las barras: $950 por persona: incluye 2 tragos de autor, 1 snack o tapeo para acompañarlos, 1 plato principal, agua y servicio de mesa. También habrá opciones sin alcohol.", "https://www.tuentrada.com/Articlemedia/images/Brands/drinkdays/home/header18.jpg", 5);
-INSERT INTO `events`(`name`, `image`, `category`) VALUES ("OConnor Anti Silence", "https://www.tuentrada.com/Articlemedia/Images/TuEntrada/mas_info/El%20Teatrito/anti-silence-inter.jpg", 2);
+INSERT INTO `events`(`name`, `description`, `image`, `category`) VALUES ("Turf", "Turf anuncia su último show del año en Capital Federal el Sábado 3 de Noviembre 21 hs. en La Trastienda (ATP) como cierre del exitoso año que tuvieron donde presentaron la Gira Odisea por todo Argentina y Latinoamérica.", "https://www.tuentrada.com/Articlemedia/Images/TuEntrada/mas_info/Trastienda%20san%20telmo/turf-inter.jpg", 1),
+("Divididos 30 Años", "https://www.tuentrada.com/Articlemedia/Images/TuEntrada/mas_info/Divididos/divididos-graficagenerica-inter.jpg", 1),
+("Paulo Londra", "Londra es un sub-20 que brilla en el género más caliente del momento. Sus rimas están llenas de buena vibra y agradecimiento. \"Confiado y Tranquilo\", como el título de su segunda canción, que tiene mas de 13 millones de visualizaciones en Youtube y que lo diferencia de los demás exponentes del género.
+Paulo Londra, es sin dudas, una de las promesas dentro del genero. El 28 y 30 de Septiembre y el 12 y 13 de octubre llevará todo su flow al mítico Teatro Gran Rex.", "https://www.tuentrada.com/Articlemedia/Images/Brands/daleplayticket/intermedia/londraSanJuan.jpg", 1);
 
 --
--- load artists
+-- Volcado de datos para la tabla `artists`
 --
-INSERT INTO `artists`(`name`, `genre`) VALUES ("No te va a gustar", 2);
-INSERT INTO `artists`(`name`, `genre`) VALUES ("Moldavsky", 1);
-INSERT INTO `artists`(`name`, `genre`) VALUES ("OConnor", 5);
+INSERT INTO `artists`(`name`, `genre`) VALUES 
+("Turf", 2),
+("Paulo Londra", 7),
+("Divididos", 2);
+
+--
+-- Volcado de datos para la tabla `sites`
+--
+INSERT INTO `sites` (`id`, `name`, `city`, `province`, `address`) VALUES
+(1, 'Estadio Polideportivo Islas Malvinas', 'Mar del Plata', 'Buenos aires', 'Av. Juan B. Justo 3525'),
+(2, 'La Trastienda Samsung', 'Capital Federal', 'Buenos aires', 'Av. Eduardo Madero 470'),
+(3, 'Estadio Aldo Cantoni', 'San Juan', 'San Juan', 'Urquiza esq. San Luis');
+
+--
+-- Volcado de datos para la tabla `seat_types`
+--
+INSERT INTO `seat_types` (`id`, `type`, `capacity`) VALUES
+(10, 'Generales de pie', 420),
+(9, 'Mesas entre piso', 100),
+(8, 'Butacas Pref.', 150),
+(7, 'Preferencial 3 y 7', 30),
+(6, 'Preferencial 1 y 2', 30);
+
+--
+-- Volcado de datos para la tabla `sites_seat_types`
+--
+INSERT INTO `sites_seat_types`(`site_id`, `seat_types_id`) VALUES (1, 1), (1, 2), (1, 3), (1, 4), (1, 5);
