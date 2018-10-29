@@ -1,10 +1,11 @@
 # gotoevent-api
-Gotoevent API
 
 ## [Database](https://github.com/Dunkansdk/gotoevent-api/blob/master/gotoeventapi.sql) (MySQL):
 ![ERD SQL](https://github.com/Dunkansdk/gotoevent-api/blob/master/images/der.png)
 
 ## Project relationships:
+- ### [gotoevent-entity](https://github.com/Dunkansdk/gotoevent-entity)
+- ### [gotoevent-webservice](https://github.com/Dunkansdk/gotoevent-webservice)
 ![Project relationships](https://github.com/Dunkansdk/gotoevent-api/blob/master/images/relation_update.png)
 <br />
 The connection of the Web Service to the api rest is done with the help of RestTemplate. 
